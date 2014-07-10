@@ -22,7 +22,13 @@ module OmniAuth
       end
 
       extra do
-        (skip_info?) ? {} : { 'raw_info' => @raw_info }
+        (skip_info?) ? {} : 
+        { 'raw_info' => @raw_info,
+          'plif_status' => @raw_info["bor_auth"]["z305"]["z303_birthplace"],
+          'patron_status' => @raw_info["bor_auth"]["z305"]["z305_bor_status"],
+          'patron_type' => @raw_info["bor_auth"]["z305"]["z305_bor_type"],
+          'ill_permission' => @raw_info["bor_auth"]["z305"]["z305_photo_permission"]
+        }
       end
 
       def request_phase
